@@ -1,0 +1,35 @@
+</
+Ini bukan variabel.
+Ini bukan keputusan.
+Ini adalah perkara.
+Tanpanya, program ini tidak layak.
+/>
+
+shteyger 5
+
+/> Sebuah perkara dibuka
+inyen trust_context
+
+/> Kita berpikir tentang nilai
+trakht amount
+
+/> Nilai dinyatakan
+zoger amount = 500
+
+/> Kita memahaminya
+farshtey amount
+
+/> Keputusan bergantung pada konteks
+trakht proceed
+
+/> Logika eksplisit
+zoger proceed = amount > 0 un ken
+
+/> Kesadaran atas hasil
+shoyn proceed
+
+/> Tapi perkara belum diselesaikan
+ibertrakht trust_context
+
+/> Program memilih berhenti
+halt

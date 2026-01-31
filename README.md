@@ -414,3 +414,196 @@ Sofek:
 Program ini belum selesai berpikir.
 Eksekusi ditunda.
 ```
+
+## 9. Memory & Decision Model
+Yidlang **memisahkan memori menjadi dua lapisan** yang saling terkait tetapi **tidak identik**:
+1. Memory Store -> menyimpan nilai
+2. Decision Ledger -> menyimpan kesadaran, keputusan, dan status berpikir
+
+> Dalam Yidlang, program bisa punya nilai yang benar, **namun tetap tidak layak dieksekusi**.
+
+### 9.1 Prinsip Dasar
+#### Prinsip 1 — Nilai ≠ Keputusan
+
+Memori menyimpan apa,\
+Ledger menyimpan mengapa dan apakah sudah disadari.
+
+#### Prinsip 2 — Eksekusi Berbasis Keputusan
+
+Tidak ada aksi kritis yang boleh dilakukan hanya karena:
+- Nilai ada
+- Ekspresi valid
+
+Aksi **harus didukung status keputusan yang sah**.
+
+### 9.2 _Memory Store_
+
+Fungsi
+- Menyimpan:
+   - _Integer_
+   - _String_
+   - _Logical state_ (`ken/safek/nisht`)
+   - hasil `inyen`
+   
+Karakteristik
+- Bersifat **pasif**
+- Tidak tahu:
+   - Apakah nilai sudah dipahami
+   - Apakah boleh dipakai
+- Mirip memori tradisional (stack/heap), **tapi bukan penentu eksekusi**
+
+Memory Store **tidak pernah menolak apa pun**.
+
+### 9.3 _Decision Ledger_
+#### Definisi
+Decision Ledger adalah struktur pusat yang mencatat:
+- Status berpikir
+- Pengakuan
+- Revisi
+- Kepercayaan
+- Finalisasi
+
+Ledger **menentukan kelayakan eksekusi**, bukan Memory Store.
+
+##### 9.3.1 Status yang Dicatat
+Setiap identifier (variabel, hasil `inyen`, ekspresi) memiliki **_Decision Record_**.
+
+Contoh status:
+
+| Status | Asal |
+| --- | --- |
+| `Trakhted` | setelah `trakht` |
+| `Understood` | setelah `farshtey` |
+| `Acknowledged` | setelah `zoger` |
+| `Reconsidered` | setelah `ibertrakht` |
+| `Exhausted` | setelah `oyshern` |
+| `FaithBased` | setelah `emunah` |
+| `Finalized` | setelah `psak` |
+| `Paused` | saat `halt` |
+| `ShortCircuited` | akibat `un/oder` |
+
+Satu identifier **bisa punya beberapa status**, kecuali yang saling eksklusif.
+
+### 9.4 Alur Status Keputusan
+#### 9.4.1 Alur Normal
+```
+trakht
+  ↓
+farshtey
+  ↓
+zoger
+  ↓
+(shoyn)
+  ↓
+psak (opsional)
+```
+
+Jika alur ini terputus -> status `Unfarshteyn` atau `Sofek`.
+
+#### 9.4.2 Revisi
+```
+ibertrakht
+  ↓
+(status pengakuan dihapus)
+```
+
+- Nilai boleh tetap ada
+- Tapi tidak sah untuk dipakai
+
+### 9.5 Interaksi Perintah dengan Ledger
+`trakht x`
+- Ledger: `x -> Trakhted`
+
+`farshtey x`
+- Valid hanya jika:
+   - `x` pernah `Trakhted`
+- Ledger: `x -> Understood`
+
+`zoger x = expr`
+- Memory Store: simpan nilai
+- Ledger:
+   - Catat sebagai `Acknowledged`
+   - Simpan _decision timestamp_
+
+`shoyn x`
+- Tidak mengubah nilai
+- Mengakses _Ledger_:
+   - Mengecek apakah `Acknowledged` ada
+
+`ibertrakht x`
+- Ledger:
+   - Hapus Acknowledged
+   - Hapus Finalized jika ada
+- Nilai di Memory Store tidak dihapus
+
+`oyshern x`
+- Ledger:
+   - Tandai `Exhausted`
+- Jika belum lengkap:
+   - Status global -> `Sofek`
+
+`emunah x`
+- Ledger:
+   - Tandai `FaithBased`
+- Risiko dicatat untuk evaluasi eksekusi
+
+`psak x`
+- Ledger:
+   - Tandai `Finalized`
+- Setelah ini:
+   - `ibertrakht x`, ditolak
+   - Status dikunci
+
+### 9.6 Short-Circuit & Ledger
+Short-circuit **selalu tercatat**.
+
+Contoh:
+```
+ken oder expensive_check
+```
+
+Ledger mencatat:
+- Operand kiri -> `Evaluated`
+- Operand kanan -> `ShortCircuited`
+- Alasan: sudah cukup untuk melanjutkan
+
+Ini penting untuk:
+- Audit logika
+- Dialog debugging
+
+### 9.7 Ledger & `inyen`
+Saat `inyen` **didefinisikan**:
+- Ledger mencatat **struktur**, bukan eksekusi
+
+Saat `inyen` dipakai:
+1. Hasil masuk _Memory Store_
+2. Ledger mencatat:
+   - Status berpikir
+   - Status pengakuan (zoger)
+   - Ketergantungan keputusan
+
+`psak` **tidak boleh** berada di dalam `inyen`.
+
+### 9.8 Program Menolak Berjalan
+
+Program ditolak untuk eksekusi penuh jika:
+- Ada identifier `Trakhted` tanpa `Understood`
+- Ada `FaithBased` di `shteyger` rendah
+- Ada `Exhausted` yang tidak lengkap
+- Ada konflik status (mis. `Finalized` + `Reconsidered`)
+
+Penolakan berbentuk **dialog**, contoh:
+```
+Sofek:
+Keputusan ini belum selesai dipikirkan.
+```
+
+### 9.9 Perbedaan dengan Bahasa Lain
+| Bahasa lain | Yidlang |
+| --- | --- |
+| Stack/Heap | Memory + Decision Ledger |
+| Control flow | Decision flow |
+| Error | Dialog |
+| Boolean | Logical state |
+| Optimization | Ethical short-circuit |
+

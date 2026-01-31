@@ -1,0 +1,7 @@
+=== UPDATE ===
+Spesifikasi formal: kapan inyen WAJIB ditutup,
+dan apa yang dianggap “cukup” untuk melanjutkan.
+
+=== REPAIR ====
+
+=== DELETE ===
