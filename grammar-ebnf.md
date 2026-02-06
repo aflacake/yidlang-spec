@@ -25,6 +25,7 @@ statement
     | level
     | ruling
     | inyen_definition
+    | inyen_resolution
     | expression_statement
     ;
 ```
@@ -87,18 +88,24 @@ level
 ruling
     = "psak" , identifier ;
 ```
-Aturan semantik (di luar EBNF):
-- Tidak boleh di dalam inyen
+Aturan semantik:
+- Mengunci decision state atau menyelesaikan inyen
 - Tidak menghasilkan nilai
-- Mengunci decision state
+- Tidak boleh digunakan sebagai ekspresi
 
-## 8. Unit Logika Sadar
+## 8. Unit Perkara Sadar (`inyen`)
 ```
 inyen_definition
     = "inyen" , identifier ,
       "(" , [ parameter_list ] , ")" ,
       "{" , { inyen_statement } , "}" ;
 ```
+
+Makna semantik:
+- Membuka perkara baru
+- Status awal: `oyf`
+- BUKAN fungsi evaluatif
+- Tidak otomatis dieksekusi
 
 ```
 parameter_list
@@ -122,6 +129,44 @@ inyen_statement
 
 Tidak ada _return_\
 Nilai terakhir yang di- `zoger` = hasil `inyen`
+
+### 8.1 Resolusi inyen
+```
+inyen_resolution
+    = "psak" , identifier
+    | "nisht" , identifier ;
+```
+
+Aturan:
+- `psak <inyen>` -> status = `farendikt`
+- `nisht <inyen>` -> status = `opgelehnt`
+- Resolusi bersifat sadar & eksplisit
+
+## 8.2 `inyen_statement`
+```
+inyen_statement
+    = comment
+    | declaration
+    | contemplation
+    | understanding
+    | acknowledgment
+    | reconsideration
+    | exhaustion
+    | trust
+    | pause
+    | level
+    | expression_statement ;
+```
+
+Tidak boleh:
+- `psak` atas decision luar
+- `inyen` bersarang
+- kontrol alur implisit
+
+> Program dianggap TIDAK LAYAK DIEKSEKUSI jika masih ada `inyen` dengan status `oyf` atau `ibertrakht`.
+
+Ini bukan error grammar,\
+ini penolakan keputusan.
 
 ## 9. _Expression Statement_
 ```

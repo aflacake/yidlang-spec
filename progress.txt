@@ -1,6 +1,13 @@
 === UPDATE ===
+--/--/-- [COMPLETE]
 Spesifikasi formal: kapan inyen WAJIB ditutup,
 dan apa yang dianggap “cukup” untuk melanjutkan.
+
+06/02/26 [--]
+- Decision Ledger Model (data structure C++) <- NEXT [COMPLETE]
+- Static Legitimacy Checker [COMPLETE]
+- Execution Gate 
+- Diagnostic Language Spec (Yiddish)
 
 === REPAIR ====
 

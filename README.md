@@ -20,6 +20,17 @@ Yidlang dibuat untuk:
       - Sistem eksperimental
       - VM/interpreter riset
       - Pendidikan how computers really think
+	  
+## Prinsip Bahasa
+
+Yidlang menggunakan bahasa Yiddish dasar (Latin/YIVO)
+sebagai bahasa sistemnya.
+
+Semua konsep inti, status, dan diagnostik
+diungkapkan dalam bahasa Yiddish.
+
+Bahasa Inggris hanya digunakan untuk dokumentasi penjelasan,
+tidak pernah sebagai bagian dari semantik bahasa.
 
 ## 2. Implementasi Teknis
 C++ murni\
@@ -308,7 +319,7 @@ Kegunaan:
 - Finalisasi proses berpikir
 
 ### 6.12 `inyen`
-Makna: _matter/concern_
+Makna: inyen = perkara/urusan/_matter_ yang tidak bernilai, tapi mengikat kelayakan eksekusi
 
 ```
 inyen name(param1, param2) {
@@ -317,17 +328,40 @@ inyen name(param1, param2) {
 ```
 
 Fungsi:
-- Mendefinisikan urusan logika tertutup
+- Mendefinisikan perkara logika tertutup
+- Merepresentasikan konteks sadar, bukan fungsi biasa
 - Tidak otomatis dieksekusi
+- Keberadaannya wajib dipertimbangkan sebelum program boleh selesai
 
 Karakteristik:
 - Tidak ada `return`
--  Nilai terakhir yang di- `zoger` = hasil
+-  Nilai terakhir yang di- `zoger` di dalam `inyen` bukan output global
+- `inyen` bukan ekspresi dan tidak bisa dievaluasi
 - Harus melalui `trakht` dan `farshtey` sebelum dipakai
+- Memiliki status keputusan, bukan nilai
+
+Status inyen (Decision Ledger)
+- `oyf`: perkara dibuka (default)
+- `ibertrakht`: dipertimbangkan ulang
+- `farendikt`: diselesaikan (psak)
+- `opgelehnt`: ditolak (nisht)
+- `blokirt`: menghalangi kelanjutan program
+
+Aturan KELAYAKAN EKSEKUSI
+- Program TIDAK BOLEH selesai jika ada inyen dengan status:
+   - `oyf`
+   - `ibertrakht`
+- `inyen` WAJIB ditutup dengan:
+   - `psak` <inyen> -> `farendikt`
+   - `nisht` <inyen> -> `opgelehnt`
+- `halt` boleh dipanggil kapan saja sebagai penghentian sadar
 
 Kegunaan:
 - Modularitas tanpa lompat alur
-- Function sebagai proses berpikir
+- Konteks sadar tanpa if / return
+- Function sebagai proses berpikir, bukan pemanggilan mekanis
+- Memisahkan:
+   “nilai benar” vs “keputusan layak”
 
 ### 6.13 Boolean Logic, Operator Logika, dan Short-Circuit ala Yidlang
 
