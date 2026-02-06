@@ -1,3 +1,5 @@
+![logo](https://raw.githubusercontent.com/aflacake/yidlang-spec/f7543f497c0e9ecc67981ee0e9296a358087d2a2/img/logo.png)
+
 # Spesifikasi Yidlang
 Versi: 0.2
 
