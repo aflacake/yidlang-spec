@@ -6,8 +6,8 @@ dan apa yang dianggap “cukup” untuk melanjutkan.
 06/02/26 [--]
 - Decision Ledger Model (data structure C++) <- NEXT [COMPLETE]
 - Static Legitimacy Checker [COMPLETE]
-- Execution Gate 
-- Diagnostic Language Spec (Yiddish)
+- Execution Gate [COMPLETE]
+- Diagnostic Language Spec (Yiddish) [COMPLETE]
 
 === REPAIR ====
 
