@@ -3,11 +3,25 @@
 Spesifikasi formal: kapan inyen WAJIB ditutup,
 dan apa yang dianggap “cukup” untuk melanjutkan.
 
-06/02/26 [--]
+06/02/26 [COMPLETE]
 - Decision Ledger Model (data structure C++) <- NEXT [COMPLETE]
 - Static Legitimacy Checker [COMPLETE]
 - Execution Gate [COMPLETE]
 - Diagnostic Language Spec (Yiddish) [COMPLETE]
+
+07/02/26 [--]
+- AST Design (node types & traversal order) [COMPLETE]
+
+- AST -> Decision Ledger Binding [COMPLETE]
+- Traversal -> Ledger Mutation Rules [COMPLETE]
+- Inyen Resolution Rules (Final, Normatif)
+- Execution Gate Formal Rules
+- Diagnostic Language Binding
+- Parser → AST Mapping (Tanpa Kode)
+- Minimal Conformance Test (Spesifikasi)
+
+=== GO TO YIDLANG ===
+- Minimal interpreter loop (C++ skeleton)
 
 === REPAIR ====
 
