@@ -9,16 +9,16 @@ dan apa yang dianggap “cukup” untuk melanjutkan.
 - Execution Gate [COMPLETE]
 - Diagnostic Language Spec (Yiddish) [COMPLETE]
 
-07/02/26 [--]
+07/02/26 [COMPLETE]
 - AST Design (node types & traversal order) [COMPLETE]
 
 - AST -> Decision Ledger Binding [COMPLETE]
 - Traversal -> Ledger Mutation Rules [COMPLETE]
-- Inyen Resolution Rules (Final, Normatif)
-- Execution Gate Formal Rules
-- Diagnostic Language Binding
-- Parser → AST Mapping (Tanpa Kode)
-- Minimal Conformance Test (Spesifikasi)
+- Inyen Resolution Rules (Final, Normatif) [COMPLETE]
+- Execution Gate Formal Rules [COMPLETE]
+- Diagnostic Language Binding [COMPLETE]
+- Parser → AST Mapping (Tanpa Kode) [COMPLETE]
+- Minimal Conformance Test (Spesifikasi) [COMPLETE]
 
 === GO TO YIDLANG ===
 - Minimal interpreter loop (C++ skeleton)

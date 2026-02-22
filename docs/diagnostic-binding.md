@@ -1,1 +1,0 @@
-# Diagnostic Language Binding
